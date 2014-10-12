@@ -2,9 +2,9 @@
 
 public class SetHoursClockState implements ClockState {
 	
-	private Timer _timer;
+	private SimpleTimer _timer;
 	
-	public SetHoursClockState(Timer timer) {
+	public SetHoursClockState(SimpleTimer timer) {
 		_timer = timer;
 	}
 

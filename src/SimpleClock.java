@@ -2,10 +2,10 @@
 public class SimpleClock {
 
 	private ClockState _currentClockState;
-	private Timer _timer;
+	private SimpleTimer _timer;
 	
 	public SimpleClock() {
-		_timer = new Timer();
+		_timer = new SimpleTimer();
 		_currentClockState = new DisplayTimeClockState(_timer);
 	}
 

@@ -3,9 +3,9 @@
 public class SetMinutesClockState implements ClockState {
 
 
-	private Timer _timer;
+	private SimpleTimer _timer;
 	
-	public SetMinutesClockState(Timer timer){
+	public SetMinutesClockState(SimpleTimer timer){
 		_timer = timer;
 	}
 

@@ -2,9 +2,9 @@
 
 public class DisplayTimeClockState implements ClockState {
 	
-	private Timer _timer;
+	private SimpleTimer _timer;
 	
-	public DisplayTimeClockState(Timer timer){
+	public DisplayTimeClockState(SimpleTimer timer){
 		_timer = timer;
 	}
 	
