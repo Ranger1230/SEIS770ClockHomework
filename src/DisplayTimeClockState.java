@@ -10,7 +10,7 @@ public class DisplayTimeClockState implements ClockState {
 	
 	@Override
 	public void Increment() {
-		// Do Nothing
+			// Do Nothing
 	}
 
 	@Override

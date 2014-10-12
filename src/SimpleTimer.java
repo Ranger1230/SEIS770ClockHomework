@@ -37,27 +37,24 @@ public class SimpleTimer implements Runnable {
 	
 	@Override
 	public void run() {
-		
-		while (true) {
 						
-			try {
+		try {
+			
+			synchronized (this) {
 				
-				synchronized (this) {
-					
-					if (isRunning && !isPaused) {
-						tick();
-					}
-					
-					System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
-					
-					wait(1000);
+				if (isRunning && !isPaused) {
+					tick();
 				}
 				
-			} catch (InterruptedException e) {
+				System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
 				
-				e.printStackTrace();
-				
+				wait(1000);
 			}
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
 		}
 	}
 	
@@ -117,14 +114,6 @@ public class SimpleTimer implements Runnable {
 		isPaused = false;
 		
 		startTime = System.currentTimeMillis();
-	}
-
-	public static void main (String[] args) {
-		
-		SimpleTimer timer = new SimpleTimer();
-		
-		timer.run();
-		
 	}
 
 }

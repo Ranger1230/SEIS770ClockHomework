@@ -11,18 +11,17 @@ public class SetMinutesClockState implements ClockState {
 
 	@Override
 	public void Increment() {
-		// TODO Auto-generated method stub
-		
+		_timer.addMinute();
 	}
 
 	@Override
 	public void Decrement() {
-		// TODO Auto-generated method stub
-		
+		_timer.subtractMinute();
 	}
 
 	@Override
 	public void ChangeMode(SimpleClock simpleClock) {
+		_timer.stop();
 		simpleClock.SetState(new SetSecondsClockState(_timer));
 	}
 

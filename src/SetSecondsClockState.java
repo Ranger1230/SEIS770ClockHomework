@@ -11,23 +11,23 @@ public class SetSecondsClockState implements ClockState {
 
 	@Override
 	public void Increment() {
-		// TODO Auto-generated method stub
-		
+		_timer.addSecond();
 	}
 
 	@Override
 	public void Decrement() {
-		// TODO Auto-generated method stub
-		
+		_timer.subtractSecond();
 	}
 
 	@Override
 	public void ChangeMode(SimpleClock simpleClock) {
+		_timer.start();
 		simpleClock.SetState(new DisplayTimeClockState(_timer));
 	}
 
 	@Override
 	public void Cancel(SimpleClock simpleClock) {
+		_timer.start();
 		simpleClock.SetState(new SetMinutesClockState(_timer));
 	}
 

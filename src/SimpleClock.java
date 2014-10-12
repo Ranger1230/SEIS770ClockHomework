@@ -6,6 +6,7 @@ public class SimpleClock {
 	
 	public SimpleClock() {
 		_timer = new SimpleTimer();
+		_timer.run();
 		_currentClockState = new DisplayTimeClockState(_timer);
 	}
 

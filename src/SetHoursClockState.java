@@ -10,12 +10,12 @@ public class SetHoursClockState implements ClockState {
 
 	@Override
 	public void Increment() {
+		_timer.addHour();
 	}
 
 	@Override
 	public void Decrement() {
-		// TODO Auto-generated method stub
-		
+		_timer.subtractHour();
 	}
 
 	@Override
