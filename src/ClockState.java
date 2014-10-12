@@ -1,7 +1,10 @@
 
 
 public interface ClockState {
-	boolean GetIsEdit();
+	boolean GetIsEditMode();
+	boolean GetIsEditHours();
+	boolean GetIsEditMinutes();
+	boolean GetIsEditSeconds();
 	void Increment();
 	void Decrement();
 	void ChangeMode(SimpleClock simpleClock);

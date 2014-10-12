@@ -13,8 +13,20 @@ public class SimpleClock {
 		_currentClockState = newState;
 	}
 	
-	public boolean GetIsEdit() {
-		return _currentClockState.GetIsEdit();
+	public boolean GetIsEditMode() {
+		return _currentClockState.GetIsEditMode();
+	}
+	
+	public boolean GetIsEditHours() {
+		return _currentClockState.GetIsEditHours();
+	}
+	
+	public boolean GetIsEditMinutes() {
+		return _currentClockState.GetIsEditMinutes();
+	}
+	
+	public boolean GetIsEditSeconds() {
+		return _currentClockState.GetIsEditSeconds();
 	}
 
 	public void Increment() {

@@ -32,7 +32,22 @@ public class DisplayTimeClockState implements ClockState {
 	}
 
 	@Override
-	public boolean GetIsEdit() {
+	public boolean GetIsEditMode() {
+		return false;
+	}
+
+	@Override
+	public boolean GetIsEditHours() {
+		return false;
+	}
+
+	@Override
+	public boolean GetIsEditMinutes() {
+		return false;
+	}
+
+	@Override
+	public boolean GetIsEditSeconds() {
 		return false;
 	}
 }
