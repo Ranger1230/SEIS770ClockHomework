@@ -156,7 +156,7 @@ public class ClockWindow {
 				UpdateTime();
 			}
 		};
-		Timer timer = new Timer(1000, actionListener);
+		Timer timer = new Timer(100, actionListener);
 		timer.start();
 	}
 	

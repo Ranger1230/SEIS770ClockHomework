@@ -8,7 +8,10 @@ public class SimpleClock {
 	
 	public SimpleClock() {
 		_timer = new SimpleTimer();
-		_timer.run();
+		
+		Thread t = new Thread(_timer, "timer");
+		t.start();
+			
 		_currentClockState = new DisplayTimeClockState(_timer);
 	}
 

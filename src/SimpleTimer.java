@@ -17,6 +17,10 @@ public class SimpleTimer implements Runnable {
 	
 	public SimpleTimer() {
 
+		secondsSaved = 0;
+		minutesSaved = 0;
+		hoursSaved = 0;
+		
 		startTime = System.currentTimeMillis();
 		isPaused = false;
 		isRunning = true;
@@ -24,15 +28,89 @@ public class SimpleTimer implements Runnable {
 	}
 	
 	public long getMinutesDisplayed() {
-		return minutesDisplayed;
+		return minutesDisplayed%60;
 	}
 	
 	public long getSecondsDisplayed() {
-		return secondsDisplayed;
+		return secondsDisplayed%60;
 	}
 	
 	public long getHoursDisplayed() {
-		return hoursDisplayed;
+		if (hoursDisplayed % 12 == 0) {
+			return 12;
+		} else {			
+			return hoursDisplayed % 12;
+		}
+	}
+	
+	public void addHour() {
+		hoursDisplayed += 1;
+		hoursSaved += 1;
+	}
+	
+	public void subtractHour() {
+		
+		if (hoursDisplayed == 0) {
+			hoursDisplayed = 11;
+		} else {			
+			hoursDisplayed -= 1;
+		}
+		
+		if (hoursSaved == 0) {
+			hoursSaved = 11;
+		} else {			
+			hoursSaved -= 1;
+		}
+	}
+	
+	public void addMinute() {
+		
+		if (minutesDisplayed == 59) {
+			minutesDisplayed = 0;
+		} else {			
+			minutesDisplayed += 1;
+		}
+		
+		if (minutesSaved == 59) {			
+			minutesSaved = 0;
+		} else {
+			minutesSaved += 1;
+		}
+	}
+	
+	public void subtractMinute() {
+		
+		if (minutesDisplayed == 0) {
+			minutesDisplayed = 59;
+		} else {			
+			minutesDisplayed -= 1;
+		}
+		
+		if (minutesSaved == 0) {
+			minutesSaved = 59;
+		} else {			
+			minutesSaved -= 1;
+		}		
+	}
+	
+	public void addSecond() {
+		secondsDisplayed += 1;
+		secondsSaved += 1;
+	}
+	
+	public void subtractSecond() {
+		if (secondsDisplayed == 0) {
+			secondsDisplayed = 59;
+		} else {			
+			secondsDisplayed -= 1;
+		}
+		
+		if (secondsSaved == 0) {
+			secondsSaved = 59;
+		} else {			
+			secondsSaved -= 1;
+		}
+		
 	}
 	
 	@Override
@@ -42,13 +120,16 @@ public class SimpleTimer implements Runnable {
 			
 			synchronized (this) {
 				
-				if (isRunning && !isPaused) {
-					tick();
+				while (true) {					
+					if (isRunning && !isPaused) {
+						tick();
+					}
+					
+					System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
+					
+					wait(1000);
 				}
 				
-				System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
-				
-				wait(1000);
 			}
 			
 		} catch (Exception e) {
@@ -61,6 +142,11 @@ public class SimpleTimer implements Runnable {
 	private void tick() {
 		
 		secondsElapsed = (System.currentTimeMillis() - startTime)/1000;
+		update();
+
+	}
+	
+	private void update() {
 		secondsDisplayed = (secondsSaved + secondsElapsed) % 60;
 		minutesElapsed = (secondsSaved + secondsElapsed) / 60;
 		minutesDisplayed = (minutesSaved + minutesElapsed) % 60;
@@ -71,32 +157,8 @@ public class SimpleTimer implements Runnable {
 		} else {
 			hoursDisplayed = (hoursSaved + hoursElapsed) % 12;
 		}
-
 	}
 	
-	public void addHour() {
-		hoursDisplayed += 1;
-	}
-	
-	public void subtractHour() {
-		hoursDisplayed -= 1;
-	}
-	
-	public void addMinute() {
-		minutesDisplayed += 1;
-	}
-	
-	public void subtractMinute() {
-		minutesDisplayed -= 1;
-	}
-	
-	public void addSecond() {
-		secondsDisplayed += 1;
-	}
-	
-	public void subtractSecond() {
-		secondsDisplayed -= 1;
-	}
 	
 	public void stop() {
 		
