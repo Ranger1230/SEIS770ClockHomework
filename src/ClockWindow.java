@@ -161,7 +161,7 @@ public class ClockWindow {
 	}
 	
 	private void UpdateTime(){
-		int[] currentTime = _simpleClock.GetTime();
+		long[] currentTime = _simpleClock.GetTime();
 		_hoursText.setText(currentTime[0]+"");
 		_minutesText.setText(currentTime[1]+"");
 		_secondsText.setText(currentTime[2]+"");

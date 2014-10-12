@@ -31,8 +31,8 @@ public class SimpleClock {
 		return _currentClockState.GetIsEditSeconds();
 	}
 	
-	public int[] GetTime(){
-		return new int[]{0,2, 21};
+	public long[] GetTime(){
+		return new long[]{_timer.getHoursDisplayed(),_timer.getMinutesDisplayed(), _timer.getSecondsDisplayed()};
 	}
 
 	public void Increment() {
