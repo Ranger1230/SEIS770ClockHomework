@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -15,9 +16,11 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 
 public class ClockWindow {
@@ -125,8 +128,19 @@ public class ClockWindow {
 	}
 	
 	private void UpdateVisibility(){
-		_increment.setVisible(_simpleClock.GetIsEdit());
-		_decrement.setVisible(_simpleClock.GetIsEdit());
-		_cancel.setVisible(_simpleClock.GetIsEdit());
+		_increment.setVisible(_simpleClock.GetIsEditMode());
+		_decrement.setVisible(_simpleClock.GetIsEditMode());
+		_cancel.setVisible(_simpleClock.GetIsEditMode());
+		_hoursText.setBorder(BorderFactory.createLineBorder(Color.black));
+		_minutesText.setBorder(BorderFactory.createLineBorder(Color.black));
+		_secondsText.setBorder(BorderFactory.createLineBorder(Color.black));
+		if(_simpleClock.GetIsEditHours()){
+			_hoursText.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		}else if(_simpleClock.GetIsEditMinutes()){
+			_minutesText.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		} else if(_simpleClock.GetIsEditSeconds()){
+			_secondsText.setBorder(BorderFactory.createLineBorder(Color.yellow));
+		}
+		
 	}
 }

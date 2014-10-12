@@ -31,8 +31,26 @@ public class SetHoursClockState implements ClockState {
 	}
 
 	@Override
-	public boolean GetIsEdit() {
+	public boolean GetIsEditMode() {
 		return true;
+	}
+
+	@Override
+	public boolean GetIsEditHours() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean GetIsEditMinutes() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean GetIsEditSeconds() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
