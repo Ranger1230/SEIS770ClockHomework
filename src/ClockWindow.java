@@ -1,26 +1,14 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import javax.swing.JFrame;
-
 import java.awt.Button;
-
-import javax.swing.JLabel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
+import javax.swing.Timer;
 
 
 public class ClockWindow {
@@ -68,6 +56,22 @@ public class ClockWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		SetupChangeModeButton();
+		
+		SetupIncrementButton();
+		
+		SetupDecrementButton();
+		
+		SetupCancelButton();
+		
+		SetupTimeDisplay();
+
+		UpdateTime();
+		
+		StartUIRefresher();
+	}
+	
+	private void SetupChangeModeButton(){
 		_changeMode = new Button("Change Mode");
 		_changeMode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,17 +81,33 @@ public class ClockWindow {
 		});
 		_changeMode.setBounds(164, 219, 102, 28);
 		frame.getContentPane().add(_changeMode);
-		
+	}
+	
+	private void SetupIncrementButton(){
 		_increment = new Button("+");
+		_increment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_simpleClock.Increment();
+			}
+		});
 		_increment.setVisible(false);
 		_increment.setBounds(31, 219, 31, 28);
 		frame.getContentPane().add(_increment);
-		
+	}
+	
+	private void SetupDecrementButton(){
 		_decrement = new Button("-");
+		_decrement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				_simpleClock.Decrement();
+			}
+		});
 		_decrement.setVisible(false);
 		_decrement.setBounds(78, 219, 31, 28);
 		frame.getContentPane().add(_decrement);
-		
+	}
+
+	private void SetupCancelButton(){
 		_cancel = new Button("Cancel");
 		_cancel.setVisible(false);
 		_cancel.addActionListener(new ActionListener() {
@@ -98,7 +118,9 @@ public class ClockWindow {
 		});
 		_cancel.setBounds(317, 219, 102, 28);
 		frame.getContentPane().add(_cancel);
-		
+	}
+	
+	private void SetupTimeDisplay(){
 		_hoursText = new JTextField();
 		_hoursText.setHorizontalAlignment(SwingConstants.CENTER);
 		_hoursText.setFont(new Font("Lucida Grande", Font.PLAIN, 75));
@@ -125,6 +147,24 @@ public class ClockWindow {
 		_secondsText.setBounds(307, 89, 137, 85);
 		frame.getContentPane().add(_secondsText);
 		_secondsText.setColumns(10);
+	}
+	
+	private void StartUIRefresher(){
+		ActionListener actionListener = new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				UpdateTime();
+			}
+		};
+		Timer timer = new Timer(1000, actionListener);
+		timer.start();
+	}
+	
+	private void UpdateTime(){
+		int[] currentTime = _simpleClock.GetTime();
+		_hoursText.setText(currentTime[0]+"");
+		_minutesText.setText(currentTime[1]+"");
+		_secondsText.setText(currentTime[2]+"");
 	}
 	
 	private void UpdateVisibility(){

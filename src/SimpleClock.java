@@ -1,4 +1,6 @@
 
+
+
 public class SimpleClock {
 
 	private ClockState _currentClockState;
@@ -27,6 +29,10 @@ public class SimpleClock {
 	
 	public boolean GetIsEditSeconds() {
 		return _currentClockState.GetIsEditSeconds();
+	}
+	
+	public int[] GetTime(){
+		return new int[]{0,2, 21};
 	}
 
 	public void Increment() {
