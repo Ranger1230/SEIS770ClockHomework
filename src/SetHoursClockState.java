@@ -10,8 +10,6 @@ public class SetHoursClockState implements ClockState {
 
 	@Override
 	public void Increment() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

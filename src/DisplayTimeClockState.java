@@ -10,14 +10,12 @@ public class DisplayTimeClockState implements ClockState {
 	
 	@Override
 	public void Increment() {
-		// TODO Auto-generated method stub
-		
+		// Do Nothing
 	}
 
 	@Override
 	public void Decrement() {
-		// TODO Auto-generated method stub
-		
+		// Do Nothing
 	}
 
 	@Override
@@ -27,8 +25,7 @@ public class DisplayTimeClockState implements ClockState {
 
 	@Override
 	public void Cancel(SimpleClock simpleClock) {
-		// TODO Auto-generated method stub
-		
+		// Do Nothing
 	}
 
 	@Override

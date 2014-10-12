@@ -5,10 +5,13 @@ public class SimpleTimer implements Runnable {
 	private boolean isRunning;
 	
 	private long startTime;
+	private long secondsSaved;
 	private long secondsElapsed;
 	private long secondsDisplayed;
+	private long minutesSaved;
 	private long minutesElapsed;
 	private long minutesDisplayed;
+	private long hoursSaved;
 	private long hoursElapsed;
 	private long hoursDisplayed;
 	
@@ -42,9 +45,10 @@ public class SimpleTimer implements Runnable {
 				synchronized (this) {
 					
 					if (isRunning && !isPaused) {
-						
+						tick();
 					}
-					tick();
+					
+					System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
 					
 					wait(1000);
 				}
@@ -58,19 +62,61 @@ public class SimpleTimer implements Runnable {
 	}
 	
 	private void tick() {
-
-		secondsElapsed = System.currentTimeMillis() - startTime/1000;
-		secondsDisplayed = (secondsDisplayed + secondsElapsed) % 60;
-		minutesElapsed = secondsElapsed / 60;
-		minutesDisplayed = (minutesDisplayed + minutesElapsed) % 60;
-		hoursElapsed = minutesElapsed / 60;
 		
-		if ((hoursDisplayed + hoursElapsed) % 12 == 0) {
+		secondsElapsed = (System.currentTimeMillis() - startTime)/1000;
+		secondsDisplayed = (secondsSaved + secondsElapsed) % 60;
+		minutesElapsed = (secondsSaved + secondsElapsed) / 60;
+		minutesDisplayed = (minutesSaved + minutesElapsed) % 60;
+		hoursElapsed = (minutesSaved + minutesElapsed) / 60;
+		
+		if ((hoursSaved + hoursElapsed) % 12 == 0) {
 			hoursDisplayed = 12;
 		} else {
-			hoursDisplayed = (hoursDisplayed + hoursElapsed) % 12;
+			hoursDisplayed = (hoursSaved + hoursElapsed) % 12;
 		}
 
+	}
+	
+	public void addHour() {
+		hoursDisplayed += 1;
+	}
+	
+	public void subtractHour() {
+		hoursDisplayed -= 1;
+	}
+	
+	public void addMinute() {
+		minutesDisplayed += 1;
+	}
+	
+	public void subtractMinute() {
+		minutesDisplayed -= 1;
+	}
+	
+	public void addSecond() {
+		secondsDisplayed += 1;
+	}
+	
+	public void subtractSecond() {
+		secondsDisplayed -= 1;
+	}
+	
+	public void stop() {
+		
+		isRunning = false;
+		isPaused = true;
+		
+		secondsSaved = secondsDisplayed;
+		minutesSaved = minutesDisplayed;
+		hoursSaved = hoursDisplayed;
+	}
+	
+	public void start() {
+		
+		isRunning = true;
+		isPaused = false;
+		
+		startTime = System.currentTimeMillis();
 	}
 
 	public static void main (String[] args) {
