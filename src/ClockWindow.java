@@ -3,9 +3,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 
-public class DisplayTime {
+public class ClockWindow {
 
 	private JFrame frame;
+	private SimpleClock simpleClock;
 
 	/**
 	 * Launch the application.
@@ -14,7 +15,7 @@ public class DisplayTime {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					DisplayTime window = new DisplayTime();
+					ClockWindow window = new ClockWindow();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -26,7 +27,7 @@ public class DisplayTime {
 	/**
 	 * Create the application.
 	 */
-	public DisplayTime() {
+	public ClockWindow() {
 		initialize();
 	}
 
