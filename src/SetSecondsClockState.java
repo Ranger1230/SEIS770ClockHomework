@@ -1,6 +1,6 @@
 
 
-public class SetSecondsClockState implements ClockState {
+public class SetSecondsClockState extends ClockState {
 
 
 	private SimpleTimer _timer;
@@ -30,24 +30,7 @@ public class SetSecondsClockState implements ClockState {
 		_timer.start();
 		simpleClock.SetState(new SetMinutesClockState(_timer));
 	}
-
-	@Override
-	public boolean GetIsEditMode() {
-		return true;
-	}
-
-	@Override
-	public boolean GetIsEditHours() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean GetIsEditMinutes() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public boolean GetIsEditSeconds() {
 		// TODO Auto-generated method stub
