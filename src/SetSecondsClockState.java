@@ -3,32 +3,32 @@
 public class SetSecondsClockState implements ClockState {
 
 
-	private SimpleTimer _timer;
+	private SimpleClock _clock;
 	
-	public SetSecondsClockState(SimpleTimer timer){
-		_timer = timer;
+	public SetSecondsClockState(SimpleClock clock){
+		_clock = clock;
 	}
 
 	@Override
 	public void Increment() {
-		_timer.addSecond();
+		_clock.addSecond();
 	}
 
 	@Override
 	public void Decrement() {
-		_timer.subtractSecond();
+		_clock.subtractSecond();
 	}
 
 	@Override
-	public void ChangeMode(SimpleClock simpleClock) {
-		_timer.start();
-		simpleClock.SetState(new DisplayTimeClockState(_timer));
+	public void ChangeMode() {
+		_clock.startTimer();
+		_clock.SetState(new DisplayTimeClockState(_clock));
 	}
 
 	@Override
-	public void Cancel(SimpleClock simpleClock) {
-		_timer.start();
-		simpleClock.SetState(new SetMinutesClockState(_timer));
+	public void Cancel() {
+		_clock.startTimer();
+		_clock.SetState(new SetMinutesClockState(_clock));
 	}
 
 	@Override

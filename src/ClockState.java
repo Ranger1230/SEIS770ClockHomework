@@ -7,6 +7,6 @@ public interface ClockState {
 	boolean GetIsEditSeconds();
 	void Increment();
 	void Decrement();
-	void ChangeMode(SimpleClock simpleClock);
-	void Cancel(SimpleClock simpleCLock);
+	void ChangeMode();
+	void Cancel();
 }

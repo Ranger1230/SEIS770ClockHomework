@@ -4,15 +4,15 @@
 public class SimpleClock {
 
 	private ClockState _currentClockState;
-	private SimpleTimer _timer;
+	private TimeKeeper _timeKeeper;
 	
 	public SimpleClock() {
-		_timer = new SimpleTimer();
+		_timeKeeper = new TimeKeeper();
 		
-		Thread t = new Thread(_timer, "timer");
+		Thread t = new Thread(_timeKeeper, "timeKeeper");
 		t.start();
 			
-		_currentClockState = new DisplayTimeClockState(_timer);
+		_currentClockState = new DisplayTimeClockState(this);
 	}
 
 	public void SetState(ClockState newState){
@@ -36,7 +36,7 @@ public class SimpleClock {
 	}
 	
 	public long[] GetTime(){
-		return new long[]{_timer.getHoursDisplayed(),_timer.getMinutesDisplayed(), _timer.getSecondsDisplayed()};
+		return new long[]{_timeKeeper.getHoursDisplayed(),_timeKeeper.getMinutesDisplayed(), _timeKeeper.getSecondsDisplayed()};
 	}
 
 	public void Increment() {
@@ -48,10 +48,43 @@ public class SimpleClock {
 	}
 
 	public void ChangeMode() {
-		_currentClockState.ChangeMode(this);
+		_currentClockState.ChangeMode();
 	}
 
 	public void Cancel() {
-		_currentClockState.Cancel(this);
+		_currentClockState.Cancel();
 	}
+	
+	public void addHour() {
+		_timeKeeper.addHour();
+	}
+	
+	public void subtractHour() {
+		_timeKeeper.subtractHour();
+	}
+	
+	public void addMinute() {
+		_timeKeeper.addMinute();
+	}
+	
+	public void subtractMinute() {
+		_timeKeeper.subtractMinute();
+	}
+	
+	public void addSecond() {
+		_timeKeeper.addSecond();
+	}
+	
+	public void subtractSecond() {
+		_timeKeeper.subtractSecond();
+	}
+	
+	public void stopTimer() {
+		_timeKeeper.stop();
+	}
+	
+	public void startTimer() {
+		_timeKeeper.start();
+	}
+	
 }

@@ -2,30 +2,30 @@
 
 public class SetHoursClockState implements ClockState {
 	
-	private SimpleTimer _timer;
+	private SimpleClock _clock;
 	
-	public SetHoursClockState(SimpleTimer timer) {
-		_timer = timer;
+	public SetHoursClockState(SimpleClock clock) {
+		_clock = clock;
 	}
 
 	@Override
 	public void Increment() {
-		_timer.addHour();
+		_clock.addHour();
 	}
 
 	@Override
 	public void Decrement() {
-		_timer.subtractHour();
+		_clock.subtractHour();
 	}
 
 	@Override
-	public void ChangeMode(SimpleClock simpleClock) {
-		simpleClock.SetState(new SetMinutesClockState(_timer));
+	public void ChangeMode() {
+		_clock.SetState(new SetMinutesClockState(_clock));
 	}
 
 	@Override
-	public void Cancel(SimpleClock simpleClock) {
-		simpleClock.SetState(new DisplayTimeClockState(_timer));
+	public void Cancel() {
+		_clock.SetState(new DisplayTimeClockState(_clock));
 	}
 
 	@Override
