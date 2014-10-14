@@ -17,3 +17,4 @@ public abstract class ClockState {
 	void Decrement(){ }
 	void ChangeMode(){ }
 	void Cancel(){ }
+}
