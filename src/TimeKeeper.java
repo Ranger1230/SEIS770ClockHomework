@@ -1,20 +1,21 @@
 
-public class SimpleTimer implements Runnable {
+public class TimeKeeper implements Runnable {
 
 	private boolean isPaused;
 	
+	private long secondsDisplayed;
+	private long minutesDisplayed;
+	private long hoursDisplayed;
+
 	private long startTime;
 	private long secondsSaved;
 	private long secondsElapsed;
-	private long secondsDisplayed;
 	private long minutesSaved;
 	private long minutesElapsed;
-	private long minutesDisplayed;
 	private long hoursSaved;
 	private long hoursElapsed;
-	private long hoursDisplayed;
 	
-	public SimpleTimer() {
+	public TimeKeeper() {
 
 		secondsSaved = 0;
 		minutesSaved = 0;

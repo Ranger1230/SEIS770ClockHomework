@@ -2,31 +2,31 @@
 
 public class SetMinutesClockState extends ClockState {
 
-	private SimpleTimer _timer;
+	private SimpleClock _clock;
 	
-	public SetMinutesClockState(SimpleTimer timer){
-		_timer = timer;
+	public SetMinutesClockState(SimpleClock clock){
+		_clock = clock;
 	}
 
 	@Override
 	public void Increment() {
-		_timer.addMinute();
+		_clock.addMinute();
 	}
 
 	@Override
 	public void Decrement() {
-		_timer.subtractMinute();
+		_clock.subtractMinute();
 	}
 
 	@Override
-	public void ChangeMode(SimpleClock simpleClock) {
-		_timer.stop();
-		simpleClock.SetState(new SetSecondsClockState(_timer));
+	public void ChangeMode() {
+		_clock.stopTimer();
+		_clock.SetState(new SetSecondsClockState(_clock));
 	}
 
 	@Override
-	public void Cancel(SimpleClock simpleClock) {
-		simpleClock.SetState(new SetHoursClockState(_timer));
+	public void Cancel() {
+		_clock.SetState(new SetHoursClockState(_clock));
 	}
 
 	@Override

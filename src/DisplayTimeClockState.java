@@ -2,15 +2,20 @@
 
 public class DisplayTimeClockState extends ClockState {
 	
-	private SimpleTimer _timer;
+	private SimpleClock _clock;
 	
-	public DisplayTimeClockState(SimpleTimer timer){
-		_timer = timer;
+	public DisplayTimeClockState(SimpleClock clock){
+		_clock = clock;
 	}
 
 	@Override
-	public void ChangeMode(SimpleClock simpleClock) {
-		simpleClock.SetState(new SetHoursClockState(_timer));
+	public void ChangeMode() {
+		_clock.SetState(new SetHoursClockState(_clock));
+	}
+
+	@Override
+	public void Cancel() {
+		// Do Nothing
 	}
 
 	@Override
