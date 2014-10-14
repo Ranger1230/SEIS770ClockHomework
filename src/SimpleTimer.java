@@ -2,7 +2,6 @@
 public class SimpleTimer implements Runnable {
 
 	private boolean isPaused;
-	private boolean isRunning;
 	
 	private long startTime;
 	private long secondsSaved;
@@ -23,7 +22,6 @@ public class SimpleTimer implements Runnable {
 		
 		startTime = System.currentTimeMillis();
 		isPaused = false;
-		isRunning = true;
 	
 	}
 	
@@ -121,12 +119,10 @@ public class SimpleTimer implements Runnable {
 			synchronized (this) {
 				
 				while (true) {					
-					if (isRunning && !isPaused) {
+					if (!isPaused) {
 						tick();
 					}
-					
-					System.out.println(hoursDisplayed + ":" + minutesDisplayed + ":" + secondsDisplayed);
-					
+										
 					wait(1000);
 				}
 				
@@ -162,7 +158,6 @@ public class SimpleTimer implements Runnable {
 	
 	public void stop() {
 		
-		isRunning = false;
 		isPaused = true;
 		
 		secondsSaved = secondsDisplayed;
@@ -172,7 +167,6 @@ public class SimpleTimer implements Runnable {
 	
 	public void start() {
 		
-		isRunning = true;
 		isPaused = false;
 		
 		startTime = System.currentTimeMillis();
